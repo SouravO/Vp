@@ -1,0 +1,11 @@
+/* small fallback tweaks if Tailwind isn't fully applied */
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .w-56 { width: 14rem; }
+  .h-14 { height: 3.5rem; }
+  .w-64 { width: 16rem; }
+  .h-16 { height: 4rem; }
+}

@@ -1,0 +1,155 @@
+body {
+  height: 300vh;
+  overflow-x: hidden;
+}
+
+h1,
+h2 {
+  font-weight: 400;
+  max-width: none;
+}
+
+/* layout: two-column row */
+.preview-section-root {
+  padding: 2.5rem 1rem;
+}
+
+.preview-row {
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* text panel */
+.textPanel {
+  flex: 0 0 36%;
+}
+
+.preview-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.preview-desc {
+  font-size: 1.1rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* image wrapper: ensure visible and limited size */
+.imageWrapper {
+  flex: 1 1 64%;
+  min-width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- FIXED COMPARISON SECTION ---------- */
+.comparisonSection {
+  position: relative; /* ADDED: needed for absolute positioning of images */
+  width: 100%;
+  max-width: 420px;
+  height: 180px; /* REDUCED: smaller rectangular height */
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  /* REMOVED: background: #141414; - this was causing the black box */
+}
+
+/* FIXED: Images now properly positioned */
+.comparisonImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* CHANGED: from 50% to 100% to fill container */
+}
+
+.comparisonImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ensure proper layering for the GSAP animation */
+.beforeImage {
+  z-index: 1;
+}
+
+.afterImage {
+  z-index: 2;
+  overflow: hidden;
+  /* GSAP will animate this with xPercent */
+}
+
+/* fallback message */
+.image-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  background: rgba(255,255,255,0.9);
+  font-size: 14px;
+  z-index: 10;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 12px;
+}
+
+/* responsive: adjust height on smaller screens */
+@media (max-width: 1024px) {
+  .comparisonSection {
+    max-width: 350px;
+    height: 150px; /* SMALLER: compact rectangular height */
+  }
+  
+  .preview-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .preview-row { 
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .textPanel { 
+    text-align: center; 
+    width: 100%;
+    flex: none;
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    flex: none;
+    /* REMOVED: height: 50% !important; - was causing issues */
+  }
+  
+  .comparisonSection { 
+    max-width: 320px;
+    height: 120px; /* SMALLER: compact mobile height */
+  }
+}
+
+@media (max-width: 420px) {
+  .comparisonSection { 
+    max-width: 280px;
+    height: 100px; /* SMALLER: very compact for small screens */
+  }
+  
+  .preview-title {
+    font-size: 1.5rem;
+  }
+  
+  .preview-desc {
+    font-size: 1rem;
+  }
+}
