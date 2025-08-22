@@ -109,13 +109,13 @@ const AboutUs = () => {
               ref={titleRef}
               className="text-2xl md:text-4xl font-extrabold mb-3 md:mb-4"
             >
-              About GroundPro
+              About VP Associated
             </h1>
             <p
               ref={paraRef}
               className="text-green-200 mb-4 md:mb-6 leading-relaxed text-sm md:text-base"
             >
-              GroundPro is at the forefront of creating exceptional football
+              VP Associated is at the forefront of creating exceptional football
               grounds. We merge years of expertise with a genuine passion for
               football, ensuring every project reflects the highest standards of
               quality and performance. Our commitment to innovation,

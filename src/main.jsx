@@ -10,6 +10,7 @@ import Projects from './pages/Projects.jsx'
 import News from './pages/News.jsx'
 import Maintenance from './pages/Maintenance.jsx'
 import Contact from './pages/Contact.jsx'
+import ContactUs from './pages/ContactUs/ContactUs.jsx'
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       { path: 'projects', element: <Projects /> },
       { path: 'news', element: <News /> },
       { path: 'maintenance', element: <Maintenance /> },
-      { path: 'contact', element: <Contact /> },
+      { path: 'contact', element: <ContactUs /> },
     ],
   },
 ])

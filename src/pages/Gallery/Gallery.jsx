@@ -7,7 +7,7 @@ if (!gsap.core.globals()["ScrollTrigger"]) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function HorizontalPhotoScroller({
+export default function Gallery({
   images = [],
   panelWidthVW = 100,
   gapVW = 0,
@@ -129,13 +129,13 @@ export default function HorizontalPhotoScroller({
       aria-label="Horizontal Photo Scroller"
     >
       <div className="absolute inset-x-0 top-4 md:top-10 z-10 mx-auto max-w-6xl px-4 md:px-6">
-        <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold tracking-tight">
-          Photographic Journey
-        </h1>
-        <p className="mt-2 md:mt-3 max-w-prose text-xs md:text-sm lg:text-base text-neutral-300">
+        {/* <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold tracking-tight text-[#0e1a12]">
+         Service
+        </h1> */}
+        {/* <p className="mt-2 md:mt-3 max-w-prose text-xs md:text-sm lg:text-base text-neutral-300">
           Scroll to explore. The gallery pins and glides horizontally with GSAP
           ScrollTrigger.
-        </p>
+        </p> */}
       </div>
 
       {/* Gradient overlays - smaller on mobile */}
@@ -228,7 +228,7 @@ export function DemoHorizontalPhotoScroller() {
         </p>
       </div>
 
-      <HorizontalPhotoScroller images={photos} panelWidthVW={100} gapVW={2} />
+      <Gallery images={photos} panelWidthVW={100} gapVW={2} />
 
       <div className="mx-auto max-w-5xl px-4 md:px-6 py-12 md:py-24 text-white/80">
         <h3 className="text-lg md:text-xl lg:text-3xl font-semibold">

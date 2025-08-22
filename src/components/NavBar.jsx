@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
+import logo from "../assets/img/logoVp.png";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,10 +20,10 @@ const NavBar = () => {
     <header className="fp-nav" role="banner">
       <div className="fp-nav-inner">
         <div className="fp-brand">
-          <span className="fp-logo" aria-hidden="true">
-            ▲
+          <span className="" aria-hidden="true">
+            <img src={logo} height={50} width={80} alt="" />
           </span>
-          <span className="fp-name">FieldPro</span>
+          <span className="fp-name">VP Associated</span>
         </div>
 
         <button
@@ -60,7 +61,7 @@ const NavBar = () => {
           >
             PROJECTS
           </NavLink>
-          <NavLink to="/news" className={linkClass} onClick={closeMobileMenu}>
+          {/* <NavLink to="/news" className={linkClass} onClick={closeMobileMenu}>
             NEWS
           </NavLink>
           <NavLink
@@ -69,7 +70,7 @@ const NavBar = () => {
             onClick={closeMobileMenu}
           >
             MAINTENANCE
-          </NavLink>
+          </NavLink> */}
         </nav>
 
         <NavLink to="/contact" className="fp-cta" onClick={closeMobileMenu}>

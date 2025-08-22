@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -8,8 +8,11 @@ gsap.registerPlugin(ScrollTrigger);
 export default function About() {
   const heroRef = useRef(null);
   const journeyRef = useRef(null);
+  const clientsRef = useRef(null);
   const principlesRef = useRef(null);
   const teamRef = useRef(null);
+  const counterRef = useRef(null);
+  const [counter, setCounter] = useState(0);
 
   const teamMembers = [
     {
@@ -48,19 +51,19 @@ export default function About() {
 
   const timelineEvents = [
     {
-      year: "2010",
+      year: "2018",
       title: "The Kick-off",
       description:
-        "FieldPro was founded with a mission to revolutionize sports surfaces.",
+        "VP Associated was founded with a mission to revolutionize sports surfaces.",
     },
     {
-      year: "2015",
+      year: "2020",
       title: "First Major League Project",
       description:
         "Completed our first professional stadium, setting new standards for quality.",
     },
     {
-      year: "2020",
+      year: "2022",
       title: "Innovating Turf Technology",
       description:
         "Introduced our proprietary hybrid turf system, combining the best of natural and artificial grass.",
@@ -70,6 +73,34 @@ export default function About() {
       title: "Global Leader",
       description:
         "Recognized as a global leader, with projects spanning continents.",
+    },
+  ];
+
+  // Add testimonials data
+  const testimonials = [
+    {
+      quote:
+        "FieldPro transformed our community pitch into a professional-grade facility. The quality of their work and their attention to detail were outstanding. Our players have never been happier.",
+      name: "Luha",
+      role: "Riverside Football Club",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=80&h=80&auto=format&fit=crop",
+    },
+    {
+      quote:
+        "The professionalism and expertise of the FieldPro team were evident from day one. They delivered our new stadium turf ahead of schedule and the playing surface is world-class. A truly reliable partner.",
+      name: "Sarah Chen",
+      role: "Director, City Sports Arena",
+      image:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=80&h=80&auto=format&fit=crop",
+    },
+    {
+      quote:
+        "Working with FieldPro was a seamless experience. Their innovative hybrid turf has drastically reduced our maintenance costs while providing a top-tier playing surface. Highly recommended!",
+      name: "Mark Johnson",
+      role: "Manager, Northwood Academy",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=80&h=80&auto=format&fit=crop",
     },
   ];
 
@@ -220,6 +251,93 @@ export default function About() {
       }
     );
 
+    // Happy Clients Section Animation with Counter
+    const clientsTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: clientsRef.current,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse",
+        onEnter: () => {
+          // Start the counter animation
+          gsap.to(counterRef.current, {
+            innerText: 500,
+            duration: 2.5,
+            ease: "power2.out",
+            snap: { innerText: 1 },
+            onUpdate: function () {
+              setCounter(Math.ceil(this.targets()[0].innerText));
+            },
+          });
+        },
+        onLeaveBack: () => {
+          // Reset counter when scrolling back up
+          setCounter(0);
+          gsap.set(counterRef.current, { innerText: 0 });
+        },
+      },
+    });
+
+    clientsTimeline.fromTo(
+      ".clients-content",
+      {
+        y: 80,
+        opacity: 0,
+        scale: 0.9,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "power3.out",
+      }
+    );
+
+    // Testimonials Animation
+    gsap.fromTo(
+      ".testimonial-header",
+      {
+        y: 50,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".testimonials-section",
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".testimonial-card",
+      {
+        y: 100,
+        opacity: 0,
+        scale: 0.9,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".testimonials-section",
+          start: "top 70%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
     // Cleanup function
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -287,6 +405,72 @@ export default function About() {
         </div>
       </section>
 
+      {/* Happy Clients Section */}
+      <section ref={clientsRef} className="py-20 px-6 bg-[#0e1a12]">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="clients-content">
+            <h2 className="text-6xl md:text-8xl font-bold text-lime-400 mb-4">
+              <span ref={counterRef}>{counter}</span>+
+            </h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Happy Clients
+            </h3>
+            <p className="text-neutral-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              Our success is measured by the satisfaction of our partners. We're
+              proud to have built a community of delighted clients who trust us
+              to deliver excellence.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="testimonials-section py-20 px-6 bg-[#1a2e15]">
+        <div className="max-w-7xl mx-auto">
+          <div className="testimonial-header text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Happy Clients
+            </h2>
+            <p className="text-neutral-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              Our reputation is built on the satisfaction of our clients. Here's
+              what some of them have to say about their experience with
+              FieldPro.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:!grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="testimonial-card bg-[#0e1a12] p-8 rounded-lg border border-lime-400/20 hover:border-lime-400/40 transition-all duration-300"
+              >
+                <div className="mb-6">
+                  <p className="text-neutral-300 text-sm leading-relaxed italic">
+                    "{testimonial.quote}"
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-lime-400/30">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold text-sm">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-lime-400 text-xs">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Our Core Principles Section */}
       <section ref={principlesRef} className="py-20 px-6 bg-[#0e1a12]">
         <div className="max-w-7xl mx-auto">
@@ -336,14 +520,14 @@ export default function About() {
       </section>
 
       {/* Meet Our Team Section */}
-      <section ref={teamRef} className="py-20 px-6 bg-[#1a2e15]">
+      {/* <section ref={teamRef} className="py-20 px-6 bg-[#1a2e15]">
         <div className="max-w-7xl mx-auto">
           <div className="team-header text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Meet Our Team
             </h2>
             <p className="text-neutral-300 text-lg max-w-3xl mx-auto">
-              The driving force behind FieldPro is our team of dedicated
+              The driving force behind VP Associated is our team of dedicated
               professionals. With a shared passion for football and a commitment
               to excellence, we bring expertise and experience to every project.
             </p>
@@ -372,7 +556,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

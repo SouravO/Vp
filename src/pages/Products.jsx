@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Products.css";
@@ -7,6 +8,7 @@ import "./Products.css";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Products() {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [index, setIndex] = useState(0);
@@ -21,58 +23,72 @@ export default function Products() {
   const products = [
     {
       id: 1,
-      name: "Natural Grass Fields",
+      name: "Safety Net",
+      // description for safety net
+      
       description:
-        "Experience the classic feel of natural grass, meticulously maintained for peak performance.",
+        "Protective safety nets designed for maximum strength and durability, providing reliable fall protection and ensuring safety in construction, sports, and industrial environments.",
       image:
         "https://images.unsplash.com/photo-1470440629860-1f4e46e7f7c7?q=80&w=1200&auto=format&fit=crop",
       category: "Turf",
     },
+    //Webbing Sling
     {
       id: 2,
+      name: "Webbing Sling",
+      description: "High-strength webbing slings engineered for safe, efficient, and versatile lifting operations. Lightweight yet durable, they provide excellent load stability and are ideal for construction, logistics, and industrial applications.",
+      image:
+        "https://images.unsplash.com/photo-1542831371-4c8b8c8c8c8c?q=80&w=1200&auto=format&fit=crop",
+      category: "Accessories",
+    },
+    // Artificial Grass
+    {
+      id: 3,
+      name: "Artificial Grass",
+     description: "Lush, realistic artificial grass solutions designed for landscaping, sports fields, and recreational areas. Durable, low-maintenance, and weather-resistant, providing year-round greenery with a natural look and feel.",
+      image:
+        "https://images.unsplash.com/photo-1555685812-3c8c8c8c8c8c?q=80&w=1200&auto=format&fit=crop",
+      category: "Turf",
+    },
+    {
+      id: 4,
       name: "Artificial Turf Fields",
-      description:
-        "Durable and versatile artificial turf, offering consistent playability and low maintenance.",
+      description: "Durable and versatile artificial turf fields designed to deliver consistent playability, reduced maintenance, and enhanced performance. Ideal for sports facilities, schools, and recreational areas.",
       image:
         "https://images.unsplash.com/photo-1434648957308-5e6a859697e8?q=80&w=1200&auto=format&fit=crop",
       category: "Turf",
     },
+    //Aluminium Foil Container
     {
-      id: 3,
-      name: "Advanced Lighting",
+      id: 5,
+      name: "Aluminium Foil Container",
       description:
-        "State-of-the-art, energy-efficient lighting to extend playing hours and ensure visibility.",
+        "Durable and versatile aluminium foil containers for food packaging and storage.",
+      image:
+        "https://images.unsplash.com/photo-1589927986089-358123789b8b?q=80&w=1200&auto=format&fit=crop",
+      category: "Accessories",
+    },
+    // Football Goal Post
+    {
+      id: 6,
+      name: "Football Goal Post",
+      description:
+        "Professional-grade football goal posts built to FIFA standards for competitive play.",
       image:
         "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1200&auto=format&fit=crop",
       category: "Lighting",
     },
+    // Aluminium Foil Container Making Machine
     {
-      id: 4,
-      name: "Shock Pads",
+      id: 7,
+      name: "Aluminium Foil Container Making Machine",
       description:
-        "Professional shock absorption systems for enhanced player safety and comfort.",
+        "High-speed machines for efficient production of aluminium foil containers.",
       image:
         "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1200&auto=format&fit=crop",
       category: "Accessories",
     },
-    {
-      id: 5,
-      name: "Drainage Systems",
-      description:
-        "Advanced drainage solutions ensuring optimal field conditions in all weather.",
-      image:
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop",
-      category: "Accessories",
-    },
-    {
-      id: 6,
-      name: "Goal Posts",
-      description:
-        "Professional-grade goal posts built to FIFA standards for competitive play.",
-      image:
-        "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=1200&auto=format&fit=crop",
-      category: "Accessories",
-    },
+   
   ];
 
   const filteredProducts = products.filter((product) => {
@@ -192,6 +208,11 @@ export default function Products() {
 
   const item = products[index];
 
+  // Navigate to contact page with product type
+  const handleRequestQuote = (productName) => {
+    navigate('/contact', { state: { productType: productName } });
+  };
+
   return (
     <section className="bg-[#0e1a12] text-white min-h-screen py-16 w-full">
       <div className="mx-auto max-w-7xl px-6">
@@ -205,57 +226,7 @@ export default function Products() {
           </p>
         </div>
 
-        {/* Filters and Search */}
-        <div
-          ref={filtersRef}
-          className="filter-section flex flex-col md:flex-row justify-between items-start gap-6 mb-12"
-        >
-          {/* Filter Buttons */}
-          <div className="flex items-center gap-4">
-            <span className="text-neutral-400 text-sm">Filter by:</span>
-            <div className="flex gap-2">
-              {filters.map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    activeFilter === filter
-                      ? "bg-lime-500 text-black shadow-lg shadow-lime-500/25"
-                      : "bg-white/10 text-neutral-300 hover:bg-white/20"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Search */}
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg
-                className="h-5 w-5 text-neutral-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 w-72 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all duration-300"
-            />
-          </div>
-        </div>
+    
 
         {/* Products Grid */}
         <div
@@ -281,7 +252,7 @@ export default function Products() {
               </div>
 
               {/* Product Content */}
-              <div className="p-6">
+              <div className="p-6 flex flex-col justify-between h-auto">
                 <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-lime-300 transition-colors duration-300">
                   {product.name}
                 </h3>
@@ -291,10 +262,10 @@ export default function Products() {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3">
-                  <button className="text-lime-400 text-sm font-medium hover:text-lime-300 transition-all duration-300 hover:scale-105">
+                  {/* <button className="text-lime-400 text-sm font-medium hover:text-lime-300 transition-all duration-300 hover:scale-105">
                     View Details
-                  </button>
-                  <button className="bg-lime-500 text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-lime-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-lime-500/25">
+                  </button> */}
+                  <button className="bg-lime-500 text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-lime-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-lime-500/25" onClick={()=>handleRequestQuote(product.name)}>
                     Request Quote
                   </button>
                 </div>

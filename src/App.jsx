@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import LoadingScreen from "./components/LoadingScreen";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,6 +59,7 @@ function App() {
           <main>
             <Outlet />
           </main>
+          <WhatsAppButton />
         </>
       )}
     </>

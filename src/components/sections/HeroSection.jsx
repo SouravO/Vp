@@ -1,10 +1,18 @@
 import React, { useEffect, useRef } from "react";
-import ground from "../../assets/img/ground.png";
+import ground from "../../assets/img/NetImage.png";
 import "../../pages/Home.css";
 import { gsap } from "../../lib/gsapSetup";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
   const ref = useRef(null);
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/products");
+
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -35,18 +43,28 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section ref={ref} className="hero-hero md:height-100vh" aria-label="FieldPro hero">
-      <div className="bg" style={{ backgroundImage: `url(${ground})` }}></div>
+    <section
+      ref={ref}
+      className="hero-hero md:height-100vh"
+      aria-label="VP Associated hero"
+    >
+      <div
+        className="bg"
+        style={{
+          backgroundImage: `url(${ground})`,
+          backdropFilter: "blur(30px)",
+        }}
+      ></div>
       <div className="overlay"></div>
       <div className="content">
-        <h1>Elevate Your Game with FieldPro</h1>
+        <h1>Elevate Your Game with VP Associated</h1>
         <p>
           We specialize in providing top-tier football grounds, ensuring optimal
           performance and safety for players. Our commitment to quality and
           innovation makes us the preferred choice for clubs and organizations.
         </p>
-        <a href="#products" className="cta">
-          Explore Our Solutions
+        <a href="" className="cta" onClick={(e) => handleClick(e)}>
+          Explore Our Products
         </a>
       </div>
     </section>

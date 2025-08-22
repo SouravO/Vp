@@ -63,9 +63,9 @@ export default function WhyChooseSection() {
   return (
     <section id="why" className="why-choose" ref={rootRef}>
       <div className="why-inner">
-        <h2 className="why-title">Why Choose FieldPro?</h2>
+        <h2 className="why-title">Why Choose VP Associated?</h2>
         <p className="why-lead">
-          FieldPro is dedicated to delivering exceptional football ground
+          VP Associated is dedicated to delivering exceptional football ground
           solutions tailored to your specific needs. Our expertise and
           commitment to quality ensure your field is always game-ready.
         </p>

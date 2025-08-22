@@ -21,7 +21,7 @@ const Footer = () => {
                 <path d="M6.5 14.5c4.5-1.2 7.2-3.9 9-9 1.1 5.3-.3 10-6.4 12.9" />
               </svg>
             </span>
-            <span className="text-lg font-medium">GroundPro</span>
+            <span className="text-lg font-medium">VP Associated</span>
           </a>
 
           {/* Nav (center) */}
@@ -114,7 +114,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="py-4 text-center text-sm text-neutral-400">
-          © 2024 GroundPro. All rights reserved.
+          © 2024 VP Associated. All rights reserved.
         </p>
       </div>
     </footer>
