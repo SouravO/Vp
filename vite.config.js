@@ -4,5 +4,5 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/Vp/',
+  base: process.env.VITE_Base_PATH || '/Vp',
 })
