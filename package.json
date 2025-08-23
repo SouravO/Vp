@@ -1,6 +1,5 @@
 {
   "name": "turf",
-  "homepage": "https://SouravO.github.io/Vp/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "preDeploy": "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
@@ -34,5 +33,6 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "vite": "^7.1.2"
-  }
+  },
+  "homepage": "https://SouravO.github.io/Vp"
 }
