@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import LoadingScreen from "./components/LoadingScreen";
 import WhatsAppButton from "./components/WhatsAppButton";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services/Service";
+import Projects from "./pages/Projects";
+import Products from "./pages/Products";
+import ContactUs from "./pages/ContactUs/ContactUs";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +56,7 @@ function App() {
     };
   }, []);
   return (
-    <>
+    <Router basename="/Vp">
       {isLoading ? (
         <LoadingScreen setIsLoading={setIsLoading} />
       ) : (
@@ -58,11 +64,19 @@ function App() {
           <NavBar />
           <main>
             <Outlet />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/contact" element={<ContactUs />} />
+            </Routes>
           </main>
           <WhatsAppButton />
         </>
       )}
-    </>
+    </Router>
   );
 }
 
